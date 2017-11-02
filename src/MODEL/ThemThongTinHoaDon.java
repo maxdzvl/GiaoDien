@@ -10,9 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class ThemPhieuThue extends javax.swing.JFrame {
+public class ThemThongTinHoaDon extends javax.swing.JFrame {
 
-    public ThemPhieuThue() {
+    public ThemThongTinHoaDon() {
         initComponents();
         LoadCB();
         loadMa();
@@ -314,7 +314,7 @@ try{
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ThemPhieuThue.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ThemThongTinHoaDon.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_cbMaPhieuThueActionPerformed
 
@@ -332,20 +332,23 @@ try{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemPhieuThue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemThongTinHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemPhieuThue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemThongTinHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemPhieuThue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemThongTinHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemPhieuThue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemThongTinHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThemPhieuThue().setVisible(true);
+                new ThemThongTinHoaDon().setVisible(true);
             }
         });
     }

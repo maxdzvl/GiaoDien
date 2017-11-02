@@ -406,7 +406,6 @@ public static java.sql.Date converUtilDateToSqlDate(java.util.Date date){
                 pre1.executeUpdate();
                 PT.setRowCount(0);
                 LoadData();
-                setVisible(false);
             }
         } catch (Exception ex) {
             System.out.println(ex.toString());
@@ -468,7 +467,6 @@ public static java.sql.Date converUtilDateToSqlDate(java.util.Date date){
                         }
                 PT.setRowCount(0);
                 LoadData();
-                setVisible(false);
         }catch (Exception ex) {
             System.out.println(ex.toString());
         }

@@ -102,7 +102,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/001_01.gif"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Th&#xea;m phi&#x1ebf;u thu&#xea;"/>
+                <Property name="text" type="java.lang.String" value="Th&#xea;m th&#xf4;ng tin h&#xf3;a &#x111;&#x1a1;n"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>

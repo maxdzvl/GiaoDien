@@ -12,7 +12,7 @@ import MODEL.PhieuThuePhong;
 import MODEL.ThayDoiHeSo;
 import MODEL.ThayDoiQuyDinh;
 import MODEL.ThemKhach;
-import MODEL.ThemPhieuThue;
+import MODEL.ThemThongTinHoaDon;
 import MODEL.TraCuuPhong;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -256,7 +256,7 @@ public class Main extends javax.swing.JFrame {
         jMenu3.add(jMenuItem4);
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/001_01.gif"))); // NOI18N
-        jMenuItem5.setText("Thêm phiếu thuê");
+        jMenuItem5.setText("Thêm thông tin hóa đơn");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -385,7 +385,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        ThemPhieuThue a = new ThemPhieuThue();
+        ThemThongTinHoaDon a = new ThemThongTinHoaDon();
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 

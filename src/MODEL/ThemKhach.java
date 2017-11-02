@@ -313,7 +313,6 @@ public class ThemKhach extends javax.swing.JFrame {
                 return;
             }
             ps.setString(3, txtcmnd.getText());
-            
             ps.setString(4, txtfNS.getText());
             ps.setString(5, txtDiaChi.getText());
             ps.setString(6, cbLoaiKH.getSelectedItem().toString());

@@ -267,6 +267,10 @@ public class ThayDoiHeSo extends javax.swing.JFrame {
 
     private void bSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSuaActionPerformed
         // TODO add your handling code here:
+        int ret = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn sửa không?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (ret != JOptionPane.YES_OPTION) {
+            return;
+        }
         try {
             Connect a = new Connect();
             Connection conn = a.getConnection();

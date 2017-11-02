@@ -27,8 +27,8 @@ public class BaoCao extends javax.swing.JFrame {
      * Creates new form BaoCao
      */
     public BaoCao() {
-        initComponents();
-       
+       initComponents();
+       LoadData();
     }
    public void LoadData(){
         

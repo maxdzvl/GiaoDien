@@ -421,11 +421,12 @@ public static java.sql.Date converUtilDateToSqlDate(java.util.Date date){
         try{
             Connect a = new Connect();
             Connection conn = a.getConnection();
-            PreparedStatement ps = conn.prepareStatement( "INSERT INTO PHIEUTHUE (MaPhieuThue,MaPhong,DonGiaThucTe,NgayBatDauThue) VALUES(?,?,?,?)");
+            PreparedStatement ps = conn.prepareStatement( "INSERT INTO PHIEUTHUE (MaPhieuThue,MaPhong,KhachHang,DonGiaThucTe,NgayBatDauThue) VALUES(?,?,?,?,?)");
             ps.setString(1, txtMaPhieuThue.getText());       
             ps.setString(2, cbMaPhong.getSelectedItem().toString());
-            ps.setString(3, txtDonGia.getText());
-            ps.setDate(4, converUtilDateToSqlDate(jDateChooser1.getDate()));
+            ps.setString(3,txtKhachHang.getText());
+            ps.setString(4, txtDonGia.getText());
+            ps.setDate(5, converUtilDateToSqlDate(jDateChooser1.getDate()));
             PreparedStatement ps1 = conn.prepareStatement( "INSERT INTO CHITIETPHIEUTHUE (MaChiTietPhieuThue,MaPhieuThue,HoTenKhachHang,CMND,DiaChi,MaLoaiKhach) VALUES(0,?,?,?,?,?)");
             ps1.setString(1, txtMaPhieuThue.getText());
             char []ten = txtKhachHang.getText().toCharArray();
@@ -487,7 +488,7 @@ public static java.sql.Date converUtilDateToSqlDate(java.util.Date date){
         try{
             Connect c = new Connect();
             Connection co = c.getConnection();
-            PreparedStatement ps = co.prepareStatement("select * from PHONG,LOAIPHONG");
+            PreparedStatement ps = co.prepareStatement("select * from PHONG P,LOAIPHONG L where P.MaLoaiPhong=L.MaLoaiPhong");
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {

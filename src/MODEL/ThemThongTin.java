@@ -1,23 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package MODEL;
 
-import static MODEL.PhieuThuePhong.converUtilDateToSqlDate;
 import VIEW.Connect;
+import static MODEL.PhieuThuePhong.converUtilDateToSqlDate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
-public class ThemThongTinHoaDon extends javax.swing.JFrame {
+public class ThemThongTin extends javax.swing.JFrame {
 
-    public ThemThongTinHoaDon() {
+    /**
+     * Creates new form ThemThongTin
+     */
+    public ThemThongTin() {
         initComponents();
         LoadCB();
         loadMa();
     }
-
 public void LoadCB(){
         try{
             Connect a = new Connect();
@@ -256,41 +271,9 @@ public void loadMa(){
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bThemActionPerformed
-        int ret = JOptionPane.showConfirmDialog(this, "Bạn có muốn lập phiếu không?", "Confirm", JOptionPane.YES_NO_OPTION);
-        if (ret != JOptionPane.YES_OPTION) {
-            return;
-        }
-        try{
-            Connect a = new Connect();
-            Connection conn = a.getConnection();
-            PreparedStatement ps = conn.prepareStatement( "UPDATE PHIEUTHUE set NgayTraPhong = '"+ converUtilDateToSqlDate(jDateChooser1.getDate()) + "',TyLePhuThuThucTe='"+cbTyLePhuThu.getSelectedItem().toString()+"',MaHoaDon='"+ txtMHD.getText() + "' where MaPhieuThue=?");
-            ps.setString(1, cbMaPhieuThue.getSelectedItem().toString());
-            PreparedStatement ps1 = conn.prepareStatement( "UPDATE PHIEUTHUE set SoNgayThue= (case when convert(int,NgayTraPhong-NgayBatDauThue)>0 then convert(int,NgayTraPhong-NgayBatDauThue) else 1  end ) where MaPhieuThue=?");
-            ps1.setString(1, cbMaPhieuThue.getSelectedItem().toString());
-            PreparedStatement ps2 = conn.prepareStatement( "UPDATE PHIEUTHUE set ThanhTien=SoNgayThue*DonGiaThucTe*TyLePhuThuThucTe where MaPhieuThue=?");
-            ps2.setString(1, cbMaPhieuThue.getSelectedItem().toString());
-            ret = ps.executeUpdate();  
-            ps1.executeUpdate();  
-            ps2.executeUpdate(); 
-            if (ret > 0) {
-                JOptionPane.showMessageDialog(this, "Thêm Thành Công");
-            } else {
-                JOptionPane.showMessageDialog(this,"Thêm Thất Bại");
-                        }
-                setVisible(false);
-        }catch (Exception ex) {
-            System.out.println(ex.toString());
-        }
-    }//GEN-LAST:event_bThemActionPerformed
-
-    private void bThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bThoatActionPerformed
-        setVisible(false);
-    }//GEN-LAST:event_bThoatActionPerformed
-
     private void cbMaPhieuThueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMaPhieuThueActionPerformed
         // TODO add your handling code here:
-try{
+        try{
             Connect c = new Connect();
             Connection co = c.getConnection();
             PreparedStatement ps = co.prepareStatement("select * from PHIEUTHUE");
@@ -308,7 +291,7 @@ try{
             {
                 if(cbMaPhieuThue.getSelectedItem().toString().equalsIgnoreCase(rs1.getString("MaPhieuThue"))){
                     txtSL.setText(rs1.getString("SL"));
-                    
+
                 }
             }
         } catch (SQLException ex) {
@@ -316,6 +299,41 @@ try{
         }
     }//GEN-LAST:event_cbMaPhieuThueActionPerformed
 
+    private void bThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bThemActionPerformed
+        int ret = JOptionPane.showConfirmDialog(this, "Bạn có muốn lập phiếu không?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (ret != JOptionPane.YES_OPTION) {
+            return;
+        }
+        try{
+            Connect a = new Connect();
+            Connection conn = a.getConnection();
+            PreparedStatement ps = conn.prepareStatement( "UPDATE PHIEUTHUE set NgayTraPhong = '"+ converUtilDateToSqlDate(jDateChooser1.getDate()) + "',TyLePhuThuThucTe='"+cbTyLePhuThu.getSelectedItem().toString()+"',MaHoaDon='"+ txtMHD.getText() + "' where MaPhieuThue=?");
+            ps.setString(1, cbMaPhieuThue.getSelectedItem().toString());
+            PreparedStatement ps1 = conn.prepareStatement( "UPDATE PHIEUTHUE set SoNgayThue= (case when convert(int,NgayTraPhong-NgayBatDauThue)>0 then convert(int,NgayTraPhong-NgayBatDauThue) else 1  end ) where MaPhieuThue=?");
+            ps1.setString(1, cbMaPhieuThue.getSelectedItem().toString());
+            PreparedStatement ps2 = conn.prepareStatement( "UPDATE PHIEUTHUE set ThanhTien=(SoNgayThue*DonGiaThucTe)+ (DonGiaThucTe*TyLePhuThuThucTe) where MaPhieuThue=?");
+            ps2.setString(1, cbMaPhieuThue.getSelectedItem().toString());
+            ret = ps.executeUpdate();
+            ps1.executeUpdate();
+            ps2.executeUpdate();
+            if (ret > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm Thành Công");
+            } else {
+                JOptionPane.showMessageDialog(this,"Thêm Thất Bại");
+            }
+            setVisible(false);
+        }catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+    }//GEN-LAST:event_bThemActionPerformed
+
+    private void bThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bThoatActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_bThoatActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -330,23 +348,20 @@ try{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemThongTinHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemThongTin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemThongTinHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemThongTin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemThongTinHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemThongTin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemThongTinHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemThongTin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThemThongTinHoaDon().setVisible(true);
+                new ThemThongTin().setVisible(true);
             }
         });
     }

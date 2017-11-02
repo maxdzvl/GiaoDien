@@ -27,7 +27,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Huu Dat
  */
 public class DanhMucPhong extends javax.swing.JFrame {
-    DefaultTableModel T = new DefaultTableModel();
+   // private String header[] = {"Mã phòng", "Tên phòng", "Mã loại phòng", "Tên loại phòng","Đơn giá","Tình trạng","Ghi chú"};
+    private DefaultTableModel T = new DefaultTableModel();
     /**
      * Creates new form DanhMucPhong
      */
